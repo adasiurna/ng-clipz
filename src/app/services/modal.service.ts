@@ -19,7 +19,6 @@ export class ModalService {
         id,
         visible: false
     })
-    console.log('modals:', this.modals);
   }
 
   isModalOpen(id: string) : boolean {

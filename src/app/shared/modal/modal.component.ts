@@ -9,7 +9,7 @@ import { ModalService } from 'src/app/services/modal.service';
 //   providers: [ModalService]
 })
 export class ModalComponent implements OnInit {
-    @Input() modalID= ''
+    @Input() modalID= '' // would be nice to understand fully what this does...
 
     constructor(public modal: ModalService) {}
 
