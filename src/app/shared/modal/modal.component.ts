@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ElementRef } from '@angular/core';
 import { ModalService } from 'src/app/services/modal.service';
 // import { CommonModule } from '@angular/common';
 
@@ -11,9 +11,13 @@ import { ModalService } from 'src/app/services/modal.service';
 export class ModalComponent implements OnInit {
     @Input() modalID= '' // would be nice to understand fully what this does...
 
-    constructor(public modal: ModalService) {}
+    constructor(public modal: ModalService, public el: ElementRef) {
+        console.log('el: ', el);
+    }
 
-    ngOnInit() {}
+    ngOnInit(): void {  // this hook works after the component has been initialized
+        document.body.appendChild(this.el.nativeElement)
+    }
 
     closeModal() {
         this.modal.toggleModal(this.modalID)
