@@ -3,14 +3,13 @@ import { Component, Input, OnInit } from '@angular/core';
 @Component({
   selector: 'app-tab',
   templateUrl: './tab.component.html',
-  styleUrls: ['./tab.component.css']
+  styleUrls: ['./tab.component.css'],
 })
 export class TabComponent implements OnInit {
-    @Input() tabTitle = ''
-    @Input() active = false
+  @Input() tabTitle = '';
+  @Input() active = false;
 
-    constructor() {}
+  constructor() {}
 
-    ngOnInit() {}
-
+  ngOnInit() {}
 }
