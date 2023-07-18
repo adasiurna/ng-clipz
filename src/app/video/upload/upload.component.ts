@@ -1,5 +1,11 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { AngularFireStorage } from '@angular/fire/compat/storage';
+import { v4 as uuid } from 'uuid';
+import { last, switchMap } from 'rxjs/operators';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
+import firebase from 'firebase/compat/app';
+import { ClipService } from 'src/app/services/clip.service';
 
 @Component({
   selector: 'app-upload',
@@ -10,6 +16,13 @@ export class UploadComponent {
   isDragover = false
   isUploadComplete = false
   file: File | null = null
+  showAlert = false
+  alertColor = 'blue'
+  alertMsg = 'Clip uploading, please wait'
+  inSubmission = false
+  percentage = 0
+  showPercentage = false
+  user: firebase.User | null = null
 
   title = new FormControl('',  [
       Validators.required,
@@ -19,14 +32,26 @@ export class UploadComponent {
     title: this.title
   })
 
+  constructor(
+    private storage: AngularFireStorage,
+    private auth: AngularFireAuth,
+    private clipsService: ClipService
+  ) {
+    auth.user.subscribe(user => this.user = user )
+  }
+
   storeFile(event: Event): void {
+    console.log('event at storeFile', event);
     event.preventDefault();
     this.isDragover = false
     console.log('Default DROP behavior prevented!');
 
     // Nullish coalescing operator (??) returns its right-hand side operand when its left-hand side operand is null or undefined,
     // and otherwise returns its left-hand side operand
-    this.file = (event as DragEvent).dataTransfer?.files.item(0) ?? null
+    this.file = (event as DragEvent).dataTransfer ?
+      (event as DragEvent).dataTransfer?.files.item(0) ?? null :
+      (event.target as HTMLInputElement).files?.item(0) ?? null
+    
     if (!this.file || this.file.type !== 'video/mp4') {
       return
     }
@@ -44,7 +69,50 @@ export class UploadComponent {
   }
 
   uploadFile() {
-    console.log('File uploaded');
+    this.uploadForm.disable()
+    this.showAlert = true
+    this.alertColor = 'blue'
+    this.alertMsg = 'Clip uploading, please wait...'
+    this.inSubmission = true
+    this.showPercentage = true
+
+    const clipFileName = uuid();
+    const clipPath = `clips/${clipFileName}.mp4`;
+
+    const task = this.storage.upload(clipPath, this.file)
+    const clipRef = this.storage.ref(clipPath)
+    
+    task.percentageChanges().subscribe(progress => {
+      this.percentage = progress as number / 100
+    })
+    
+    task.snapshotChanges().pipe(
+      last(),
+      switchMap(() => clipRef.getDownloadURL())
+    ).subscribe({
+      next: (url) => {
+        const clip = {
+          uid: this.user?.uid as string,
+          displayName: this.user?.displayName as string,
+          title: this.title.value as string,
+          fileName: `${clipFileName}.mp4`,
+          url
+        }
+        this.clipsService.createClip(clip)
+        console.log('clip: ', clip);
+        this.alertColor = 'green'
+        this.alertMsg = 'Success! Upload completed successfully!'
+        this.showPercentage = false
+      },
+      error: (error) => {
+        this.uploadForm.enable()
+        this.alertColor = 'red'
+        this.alertMsg = 'Error uploading'
+        this.inSubmission = true
+        this.showPercentage = false
+        console.log('errrrrror in uploading file:', error);
+      }
+    })
   }
 
 }

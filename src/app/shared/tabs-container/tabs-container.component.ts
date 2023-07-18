@@ -17,7 +17,6 @@ export class TabsContainerComponent implements AfterContentInit {
     // }
 
     ngAfterContentInit(): void { // projected content has not initialized yet here
-        console.log('tabs:', this.tabs?.length);
         const activeTabs = this.tabs?.filter(
             tab => tab.active
         )

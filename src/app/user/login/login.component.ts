@@ -19,7 +19,6 @@ export class LoginComponent {
   constructor(private auth: AngularFireAuth) {}
 
   async login() {
-    console.log('logging in...');
     this.showAlert = true
     this.alertMsg = 'Please wait! You are being logged in.'
     this.alertColor = 'blue'
@@ -37,7 +36,6 @@ export class LoginComponent {
       this.inSubmission = false
       return
     }
-    console.log('logged in? cred', this.credentials);
 
     this.alertMsg = 'Great success! You have successfuly logged in.'
     this.alertColor = 'green'

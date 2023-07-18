@@ -11,9 +11,7 @@ import { ModalService } from 'src/app/services/modal.service';
 export class ModalComponent implements OnInit, OnDestroy {
     @Input() modalID= '' // would be nice to understand fully what this does...
 
-    constructor(public modal: ModalService, public el: ElementRef) {
-        console.log('el: ', el);
-    }
+    constructor(public modal: ModalService, public el: ElementRef) {}
 
     ngOnInit(): void {  // this hook works after the component has been initialized
         document.body.appendChild(this.el.nativeElement)
