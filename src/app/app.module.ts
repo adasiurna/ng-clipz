@@ -17,7 +17,7 @@ import { ClipComponent } from './clip/clip.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from './shared/shared.module';
-import { AngularFireStorageModule } from '@angular/fire/compat/storage'
+import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 
 @NgModule({
   declarations: [
@@ -27,7 +27,7 @@ import { AngularFireStorageModule } from '@angular/fire/compat/storage'
     AboutComponent,
     UploadComponent,
     ClipComponent,
-    NotFoundComponent
+    NotFoundComponent,
   ],
   imports: [
     BrowserModule,

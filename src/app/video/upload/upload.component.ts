@@ -48,10 +48,9 @@ export class UploadComponent implements OnDestroy {
   }
 
   storeFile(event: Event): void {
-    console.log('event at storeFile', event);
     event.preventDefault();
     this.isDragover = false
-    console.log('Default DROP behavior prevented!');
+    console.log('Default DROP behavior prevented here.');
 
     // Nullish coalescing operator (??) returns its right-hand side operand when its left-hand side operand is null or undefined,
     // and otherwise returns its left-hand side operand
@@ -107,7 +106,6 @@ export class UploadComponent implements OnDestroy {
           timestamp: firebase.firestore.FieldValue.serverTimestamp()
         }
         const clipDocRef = await this.clipsService.createClip(clip)
-        console.log('clip: ', clip);
         this.alertColor = 'green'
         this.alertMsg = 'Success! Upload completed successfully!'
         this.showPercentage = false

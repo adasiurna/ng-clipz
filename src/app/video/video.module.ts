@@ -4,11 +4,13 @@ import { CommonModule } from '@angular/common';
 import { VideoRoutingModule } from './video-routing.module';
 import { ManageComponent } from './manage/manage.component';
 import { SharedModule } from '../shared/shared.module';
+import { EditComponent } from './edit/edit.component';
 
 
 @NgModule({
   declarations: [
-    ManageComponent
+    ManageComponent,
+    EditComponent
   ],
   imports: [
     CommonModule,
