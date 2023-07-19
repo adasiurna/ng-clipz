@@ -5,6 +5,7 @@ import { VideoRoutingModule } from './video-routing.module';
 import { ManageComponent } from './manage/manage.component';
 import { SharedModule } from '../shared/shared.module';
 import { EditComponent } from './edit/edit.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -16,6 +17,8 @@ import { EditComponent } from './edit/edit.component';
     CommonModule,
     VideoRoutingModule,
     SharedModule,
+    FormsModule,
+    ReactiveFormsModule
   ]
 })
 export class VideoModule { }
