@@ -12,7 +12,6 @@ import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { HomeComponent } from './home/home.component';
 import { AboutComponent } from './about/about.component';
 import { VideoModule } from './video/video.module';
-import { UploadComponent } from './video/upload/upload.component';
 import { ClipComponent } from './clip/clip.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -25,7 +24,6 @@ import { AngularFireStorageModule } from '@angular/fire/compat/storage';
     NavComponent,
     HomeComponent,
     AboutComponent,
-    UploadComponent,
     ClipComponent,
     NotFoundComponent,
   ],
