@@ -23,8 +23,6 @@ export class ManageComponent implements OnInit {
     private modal: ModalService,
   ) {
     this.sort$ = new BehaviorSubject(this.videoOrder)
-    this.sort$.subscribe(console.log)
-    this.sort$.next('test')
   }
 
   ngOnInit(): void {

@@ -38,7 +38,6 @@ export class AuthService {
     }
 
   public async createUser(userData: IUser) {
-    console.log('userData', userData);
     if(!userData.password) {
       throw new Error("Pass not provided!")
     }

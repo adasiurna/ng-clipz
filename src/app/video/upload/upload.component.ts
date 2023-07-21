@@ -65,13 +65,12 @@ export class UploadComponent implements OnDestroy {
       this.file.name.replace(/\.[^/.]+$/, '')
     )
     this.isUploadComplete = true
-    console.log('file: ', this.file);
   }
 
   handleDragover(event: Event): void {
     event.preventDefault();
     this.isDragover = true
-    console.log('Default DRAGOVER behavior prevented!');
+    console.log('Default DRAGOVER behavior prevented here.');
   }
 
   uploadFile() {
