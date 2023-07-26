@@ -54,7 +54,6 @@ export class ManageComponent implements OnInit {
   }
 
   openModal(event: Event, clip: IClip) {
-    console.log('build icon clicked');
     event.preventDefault()
 
     this.activeClip = clip

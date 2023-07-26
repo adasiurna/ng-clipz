@@ -61,7 +61,6 @@ export class UploadComponent implements OnDestroy {
     }
     event.preventDefault();
     this.isDragover = false
-    console.log('Default DROP behavior prevented here.');
 
     // Nullish coalescing operator (??) returns its right-hand side operand when its left-hand side operand is null or undefined,
     // and otherwise returns its left-hand side operand
@@ -70,10 +69,8 @@ export class UploadComponent implements OnDestroy {
       (event.target as HTMLInputElement).files?.item(0) ?? null
     
     if (!this.file || this.file.type !== 'video/mp4') {
-      console.log('no file');
       return
     }
-    console.log('1');
 
     this.screenshots = await this.ffmpegService.getScreenshots(this.file)
 
@@ -88,7 +85,6 @@ export class UploadComponent implements OnDestroy {
   handleDragover(event: Event): void {
     event.preventDefault();
     this.isDragover = true
-    console.log('Default DRAGOVER behavior prevented here.');
   }
 
   async uploadFile() {
@@ -166,7 +162,6 @@ export class UploadComponent implements OnDestroy {
         this.alertMsg = 'Error uploading'
         this.inSubmission = true
         this.showPercentage = false
-        console.log('errrrrror in uploading file:', error);
       }
     })
   }
